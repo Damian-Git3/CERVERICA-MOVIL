@@ -20,6 +20,9 @@ tilesMaterial = "1.1.0"
 horologistComposeTools = "0.4.8"
 horologistTiles = "0.4.8"
 watchfaceComplicationsDataSourceKtx = "1.1.1"
+material3Android = "1.2.1"
+composeMaterialVersion = "1.3.1"
+uiToolingPreviewAndroid = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +49,9 @@ androidx-tiles-material = { group = "androidx.wear.tiles", name = "tiles-materia
 horologist-compose-tools = { group = "com.google.android.horologist", name = "horologist-compose-tools", version.ref = "horologistComposeTools" }
 horologist-tiles = { group = "com.google.android.horologist", name = "horologist-tiles", version.ref = "horologistTiles" }
 androidx-watchface-complications-data-source-ktx = { group = "androidx.wear.watchface", name = "watchface-complications-data-source-ktx", version.ref = "watchfaceComplicationsDataSourceKtx" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterialVersion" }
+androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
