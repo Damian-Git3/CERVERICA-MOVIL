@@ -24,22 +24,24 @@ fun NavBar() {
     BottomAppBar(
         actions = {
             Row(
-               horizontalArrangement = Arrangement.Center
-
+               horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
             ) {
                 IconButton(onClick = { /* do something */ }) {
-                    Icon(Icons.Filled.AllInbox, contentDescription = "Localized description")
+                    Icon(Icons.Filled.AllInbox, contentDescription = "Localized description", modifier = Modifier.fillMaxWidth())
                 }
                 IconButton(onClick = { /* do something */ }) {
                     Icon(
                         Icons.Filled.Home,
                         contentDescription = "Localized description",
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
                 IconButton(onClick = { /* do something */ }) {
                     Icon(
                         Icons.Filled.ShoppingCart,
                         contentDescription = "Localized description",
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
