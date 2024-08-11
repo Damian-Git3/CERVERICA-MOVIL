@@ -10,8 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.example.cerverica.MyApplication
 
 object RetrofitClient {
-    //private const val BASE_DOMAIN = "https://5c0f-2806-264-5482-37d-ed62-3a0b-b46a-4643.ngrok-free.app"
-    private const val BASE_DOMAIN = "http://10.0.2.2:5000"
+    private const val BASE_DOMAIN = "https://727b-2806-264-5482-37d-ed62-3a0b-b46a-4643.ngrok-free.app/"
+    //private const val BASE_DOMAIN = "http://10.0.2.2:5000"
     private const val BASE_URL = "${BASE_DOMAIN}/api/"
 
     private fun getToken(): String? {

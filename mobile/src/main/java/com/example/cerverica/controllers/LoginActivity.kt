@@ -3,6 +3,7 @@ package com.example.cerverica
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import com.example.cerverica.controllers.RegistroActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -48,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
             RetrofitClient.instance.postLogin(loginRequest).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    Log.d("API_RESPONSE", "Response: ${response}")
                     if (response.isSuccessful) {
                         val loginResponse = response.body()
                         if (loginResponse?.isSuccess == true) {
@@ -68,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, loginResponse?.message, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@LoginActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "No successful: ${response.message()}", Toast.LENGTH_SHORT).show()
                     }
                 }
 

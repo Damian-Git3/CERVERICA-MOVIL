@@ -6,22 +6,37 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cerverica.BaseActivity
 import com.example.cerverica.R
 import com.example.cerverica.adapter.RecetaAdapter
 import com.example.cerverica.models.RecetaModel
 import com.example.cerverica.apiservice.RetrofitClient
+import com.example.cerverica.databinding.ActivityClienteBinding
+import com.example.cerverica.viewmodel.RecetaViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ClienteActivity : AppCompatActivity() {
-    private lateinit var recyclerViewReceta: RecyclerView
-    private lateinit var progressBarReceta: ProgressBar
+class ClienteActivity : BaseActivity() {
+    //private lateinit var recyclerViewReceta: RecyclerView
+    //private lateinit var progressBarReceta: ProgressBar
+    lateinit var binding: ActivityClienteBinding
+    private lateinit var recetaViewModel: RecetaViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityClienteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        initRecetas()
+
+        /*
         setContentView(R.layout.activity_cliente)
 
         recyclerViewReceta = findViewById(R.id.recyclerViewReceta)
@@ -29,8 +44,34 @@ class ClienteActivity : AppCompatActivity() {
 
         progressBarReceta = findViewById(R.id.progressBarReceta)
         fetchRecetas()
+        * */
     }
 
+    private fun initRecetas(){
+        binding.progressBarReceta.visibility = View.VISIBLE
+        recetaViewModel = ViewModelProvider(this).get(RecetaViewModel::class.java)
+
+        // Observadores para los LiveData del ViewModel
+        recetaViewModel.recetas.observe(this, Observer { recetas ->
+            if (recetas != null) {
+                binding.recyclerViewReceta.adapter = RecetaAdapter(recetas)
+            }
+        })
+
+        recetaViewModel.isLoading.observe(this, Observer { isLoading ->
+            binding.progressBarReceta.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
+
+        recetaViewModel.error.observe(this, Observer { errorMsg ->
+            errorMsg?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // Llamada para obtener las recetas
+        recetaViewModel.fetchRecetas()
+    }
+/*
     private fun fetchRecetas() {
         progressBarReceta.visibility = View.VISIBLE
 
@@ -57,5 +98,5 @@ class ClienteActivity : AppCompatActivity() {
                 Toast.makeText(this@ClienteActivity, "Error al cargar las recetas", Toast.LENGTH_SHORT).show()
             }
         })
-    }
+    }*/
 }
