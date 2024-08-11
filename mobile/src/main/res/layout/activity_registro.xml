@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#343434"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_background" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="0dp"
+                android:text="Crear \n Cuenta"
+                android:textColor="#ffffff"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/full_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Nombre"
+                android:padding="8dp"
+                android:drawablePadding="16dp"
+                android:textColorHint="#E1A500"
+                android:ems="10"
+                android:textColor="#ffffff"
+                android:inputType="textPersonName"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/name"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Email"
+                android:padding="8dp"
+                android:drawablePadding="16dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#E1A500"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/email"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Contraseña"
+                android:padding="8dp"
+                android:drawablePadding="16dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#E1A500"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/password"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                />
+            <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Confirmar Contraseña"
+                android:padding="8dp"
+                android:drawablePadding="16dp"
+                android:textColorHint="#E1A500"
+                android:textColor="#ffffff"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/password"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                />
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/btn_login" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_button"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/background_btn_2"
+                android:text="Registrarse"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="32dp"/>
+
+            <TextView
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="¿Ya tienes una cuenta? Iniciar sesión"
+                android:textAlignment="center"
+                android:textColor="#E1A500"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

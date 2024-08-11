@@ -1,4 +1,4 @@
-package com.example.cerverica.ui
+/*package layout.ui
 
 import android.widget.LinearLayout
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -76,4 +76,4 @@ fun Inventario(text: MutableState<String> = remember { mutableStateOf("INVENTARI
 
     }
 
-}
+}*/
