@@ -48,7 +48,7 @@
                 android:drawablePadding="16dp"
                 android:textColorHint="#E1A500"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="32dp"
                 android:drawableStart="@drawable/email"
                 android:layout_marginStart="32dp"
@@ -77,8 +77,9 @@
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="start"
                 android:layout_marginTop="16dp"
+                android:rotation="180"
                 app:srcCompat="@drawable/btn_login" />
 
             <androidx.appcompat.widget.AppCompatButton

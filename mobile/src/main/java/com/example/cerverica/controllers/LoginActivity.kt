@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                             saveUserInfo(loginResponse.idUsuario, loginResponse.nombre, loginResponse.role)
 
                             // Redirigir según el rol del usuario
+                            println(loginResponse.role)
                             when (loginResponse.role) {  // Suponiendo que "roles" es una lista y tomas el primer rol
                                 "Admin" -> startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
                                 "Produccion" -> startActivity(Intent(this@LoginActivity, EmpleadoActivity::class.java))

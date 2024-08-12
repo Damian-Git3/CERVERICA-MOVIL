@@ -64,7 +64,7 @@
                 android:textColor="#ffffff"
                 android:textColorHint="#E1A500"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="32dp"
                 android:drawableStart="@drawable/email"
                 android:layout_marginStart="32dp"
@@ -110,8 +110,9 @@
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="start"
                 android:layout_marginTop="16dp"
+                android:rotation="180"
                 app:srcCompat="@drawable/btn_login" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -126,16 +127,34 @@
                 android:textStyle="bold"
                 android:layout_margin="32dp"/>
 
-            <TextView
-                android:id="@+id/login_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="¿Ya tienes una cuenta? Iniciar sesión"
-                android:textAlignment="center"
-                android:textColor="#E1A500"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <!-- Texto blanco -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Ya tienes una cuenta?"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Texto con color -->
+                <TextView
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Iniciar sesión"
+                    android:textColor="#E1A500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
