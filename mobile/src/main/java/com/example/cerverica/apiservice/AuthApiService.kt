@@ -3,15 +3,20 @@ package com.example.cerverica.apiservice
 
 import com.example.cerverica.models.LoginRequest
 import com.example.cerverica.models.LoginResponse
-import com.example.cerverica.models.RecetaModel
+import com.example.cerverica.models.cliente.RecetaModel
 import com.example.cerverica.models.RegisterRequest
 import com.example.cerverica.models.RegisterResponse
+import com.example.cerverica.models.cliente.RecetaAgregarFavoritoRequest
+import com.example.cerverica.models.cliente.RecetaEliminarFavoritoRequest
+import com.example.cerverica.models.cliente.RecetaFavoritoModel
+import com.example.cerverica.models.cliente.RecetaPackModel
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface AuthApiService {
     @POST("Account/login")
@@ -25,4 +30,16 @@ interface AuthApiService {
 
     @GET("Receta")
     fun getRecetas():Call<List<RecetaModel>>
+
+    @GET("Receta/obtener-recetas-landing")
+    fun getRecetasPack():Call<List<RecetaPackModel>>
+
+    @GET("Favoritos/obtener-favoritos/{id}")
+    fun getRecetasFavoritos(@Path("id") id: String):Call<List<RecetaFavoritoModel>>
+
+    @POST("Favoritos/agregar-favorito")
+    fun postAgregarFavoritos(@Body recetaRequest: RecetaAgregarFavoritoRequest):Call<Void>
+
+    @POST("Favoritos/eliminar-favorito")
+    fun postEliminarFavoritos(@Body recetaRequest: RecetaEliminarFavoritoRequest):Call<Void>
 }

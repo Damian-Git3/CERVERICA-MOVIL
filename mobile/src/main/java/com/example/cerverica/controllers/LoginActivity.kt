@@ -14,13 +14,12 @@ import com.example.cerverica.apiservice.RetrofitClient
 import com.example.cerverica.models.LoginRequest
 import com.example.cerverica.models.LoginResponse
 import com.example.cerverica.controllers.AdminActivity
-import com.example.cerverica.controllers.ClienteActivity
+import com.example.cerverica.controllers.cliente.ClienteActivity
 import com.example.cerverica.controllers.EmpleadoActivity
 import com.example.cerverica.controllers.RegistroActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -37,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()

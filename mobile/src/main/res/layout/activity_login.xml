@@ -49,6 +49,8 @@
                 android:textColorHint="#E1A500"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:layout_marginTop="32dp"
                 android:drawableStart="@drawable/email"
                 android:layout_marginStart="32dp"
@@ -64,7 +66,10 @@
                 android:drawablePadding="16dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#E1A500"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:ems="10"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:layout_marginTop="32dp"
                 android:drawableStart="@drawable/password"
@@ -73,20 +78,12 @@
                 android:background="@drawable/edittext_background"
                 />
 
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/btn_login" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_button"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/background_btn_2"
+                android:background="@drawable/login_selector"
                 android:text="Iniciar sesión"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -106,4 +103,14 @@
                 />
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:rotation="180"
+        app:srcCompat="@drawable/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
