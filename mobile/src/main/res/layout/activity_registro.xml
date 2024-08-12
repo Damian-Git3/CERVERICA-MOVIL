@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#343434"
     android:orientation="vertical">
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -17,24 +16,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_background" />
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rotation="180"
-        android:layout_gravity="end"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_login" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="1dp"
             android:orientation="vertical" >
+
 
             <TextView
                 android:id="@+id/textView2"
@@ -147,4 +139,14 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:rotation="180"
+        android:elevation="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
