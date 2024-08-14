@@ -23,94 +23,94 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bienvenido"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="100dp"
-                android:layout_marginStart="32dp"
+                android:text="Bienvenido"
                 android:textColor="#ffffff"
                 android:textSize="40dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Email"
-                android:textColor="#ffffff"
-                android:padding="8dp"
-                android:drawablePadding="16dp"
-                android:textColorHint="#E1A500"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:layout_marginTop="32dp"
-                android:drawableStart="@drawable/email"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edittext_background"
-                />
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#E1A500" />
+
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Contraseña"
-                android:padding="8dp"
-                android:drawablePadding="16dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#E1A500"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:ems="10"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:layout_marginTop="32dp"
-                android:drawableStart="@drawable/password"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edittext_background"
-                />
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#E1A500" />
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:rotation="180"
+                app:srcCompat="@drawable/btn_login" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_button"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/login_selector"
+                android:layout_margin="32dp"
+                android:background="@drawable/background_btn_2"
                 android:text="Iniciar sesión"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_margin="32dp"/>
+                android:textStyle="bold" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="#E1A500"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿Eres un usuario nuevo?"
                 android:layout_marginTop="32dp"
+                android:layout_marginBottom="10dp"
+                android:text="¿Eres un usuario nuevo?"
                 android:textAlignment="center"
                 android:textColor="#E1A500"
-                android:textStyle="bold"
                 android:textSize="16dp"
-                />
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
-
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:rotation="180"
-        app:srcCompat="@drawable/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
