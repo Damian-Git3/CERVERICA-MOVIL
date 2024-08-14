@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="com.google.android.gms.permission.BIND_DATA_LAYER_SERVICE" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -13,8 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CERVERICA"
         tools:targetApi="31"
-        android:usesCleartextTraffic="true"
-        android:screenOrientation="portrait">
+        android:usesCleartextTraffic="true">
+        <service
+            android:name=".SessionMobileListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+            </intent-filter>
+        </service>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -31,10 +38,10 @@
         <activity android:name=".controllers.RegistroActivity" />
 
         <!-- AdminActivity -->
-        <activity android:name=".controllers.AdminActivity" />
+        <activity android:name=".controllers.admin.AdminActivity" />
 
         <!-- EmpleadoActivity -->
-        <activity android:name=".controllers.EmpleadoActivity" />
+        <activity android:name=".controllers.empleado.EmpleadoActivity" />
 
         <!-- ClienteActivity -->
         <activity android:name=".controllers.cliente.ClienteActivity" />

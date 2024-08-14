@@ -16,10 +16,11 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 import com.bumptech.glide.Glide
+import com.example.cerverica.models.cliente.RecetaFavoritoModel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class RecetaPackAdapter(private var recetaspacks: List<RecetaPackModel>) : RecyclerView.Adapter<RecetaPackAdapter.RecetaPackViewHolder>() {
+class RecetaPackAdapter(private var recetaspacks: List<RecetaPackModel>, private val onClickListener:(RecetaPackModel) -> Unit) : RecyclerView.Adapter<RecetaPackAdapter.RecetaPackViewHolder>() {
 
     private var filteredList: MutableList<RecetaPackModel> = recetaspacks.toMutableList()
 
@@ -29,7 +30,8 @@ class RecetaPackAdapter(private var recetaspacks: List<RecetaPackModel>) : Recyc
     }
 
     override fun onBindViewHolder(holder: RecetaPackViewHolder, position: Int) {
-        holder.render(filteredList[position])
+        Log.d("compras", "prueba onBindViewHolder: ")
+        holder.render(filteredList[position], onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -53,7 +55,7 @@ class RecetaPackAdapter(private var recetaspacks: List<RecetaPackModel>) : Recyc
 
     class RecetaPackViewHolder(private val binding: ViewholderPackBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun render(packReceta: RecetaPackModel) {
+        fun render(packReceta: RecetaPackModel, onClickListener:(RecetaPackModel) -> Unit) {
             binding.apply {
                 nombreRecetaPack.text = packReceta.nombreReceta
                 precioRecetaPack.text = formatPrice(packReceta.precioPaquete1Receta)
@@ -70,6 +72,9 @@ class RecetaPackAdapter(private var recetaspacks: List<RecetaPackModel>) : Recyc
                 setPriceClickListener(precioRecetaPack12, packReceta.precioPaquete12Receta)
                 setPriceClickListener(precioRecetaPack24, packReceta.precioPaquete24Receta)
 
+            }
+            binding.agregarFavorito.setOnClickListener {
+                onClickListener(packReceta)
             }
         }
 

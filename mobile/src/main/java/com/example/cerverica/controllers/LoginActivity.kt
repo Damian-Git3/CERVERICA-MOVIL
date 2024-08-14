@@ -13,19 +13,31 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cerverica.apiservice.RetrofitClient
 import com.example.cerverica.models.LoginRequest
 import com.example.cerverica.models.LoginResponse
-import com.example.cerverica.controllers.AdminActivity
+import com.example.cerverica.controllers.admin.AdminActivity
 import com.example.cerverica.controllers.cliente.ClienteActivity
-import com.example.cerverica.controllers.EmpleadoActivity
+import com.example.cerverica.controllers.empleado.EmpleadoActivity
 import com.example.cerverica.controllers.RegistroActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginActivity : AppCompatActivity() {
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.wearable.DataClient
+import com.google.android.gms.wearable.DataEventBuffer
+import com.google.android.gms.wearable.DataItem
+import com.google.android.gms.wearable.PutDataMapRequest
+import com.google.android.gms.wearable.Wearable
+
+class LoginActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
+
+    private lateinit var dataClient: DataClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Inicializar DataClient
+        dataClient = Wearable.getDataClient(this)
 
         val emailEditText = findViewById<EditText>(R.id.email)
         val passwordEditText = findViewById<EditText>(R.id.password)
@@ -60,10 +72,13 @@ class LoginActivity : AppCompatActivity() {
                             // Guardar cualquier otra información del usuario según sea necesario
                             saveUserInfo(loginResponse.idUsuario, loginResponse.nombre, loginResponse.role)
 
+                            // Enviar datos de login al Wear OS
+                            sendLoginDataToWearOS(loginResponse.idUsuario, loginResponse.nombre, loginResponse.role)
+
                             // Redirigir según el rol del usuario
                             when (loginResponse.role) {  // Suponiendo que "roles" es una lista y tomas el primer rol
                                 "Admin" -> startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
-                                "Produccion" -> startActivity(Intent(this@LoginActivity, EmpleadoActivity::class.java))
+                                "Operador" -> startActivity(Intent(this@LoginActivity, EmpleadoActivity::class.java))
                                 "Cliente" -> startActivity(Intent(this@LoginActivity, ClienteActivity::class.java))
                                 else -> Toast.makeText(this@LoginActivity, "Rol desconocido", Toast.LENGTH_SHORT).show()
                             }
@@ -102,5 +117,38 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("nombre", nombre)
         editor.putString("role", role)
         editor.apply()
+    }
+
+    private fun sendLoginDataToWearOS(idUsuario: String, nombre: String, role: String) {
+        val putDataMapRequest = PutDataMapRequest.create("/login_data")
+        val dataMap = putDataMapRequest.dataMap
+        dataMap.putString("idUsuario", idUsuario)
+        dataMap.putString("nombre", nombre)
+        dataMap.putString("role", role)
+        dataMap.putString("action", "change_activity")  // Añadido para cambiar la actividad
+        val request = putDataMapRequest.asPutDataRequest()
+        val dataItemTask: Task<DataItem> = dataClient.putDataItem(request)
+
+        dataItemTask.addOnSuccessListener {
+            Log.d("WEAR_PROCES", "Login data sent successfully to Wear OS.")
+        }
+
+        dataItemTask.addOnFailureListener {
+            Log.e("WEAR_PROCES", "Failed to send login data to Wear OS.")
+        }
+    }
+
+    override fun onDataChanged(dataEvents: DataEventBuffer) {
+        // Manejar los datos recibidos si es necesario
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dataClient.addListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dataClient.removeListener(this)
     }
 }

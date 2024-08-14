@@ -1,5 +1,7 @@
 package com.example.cerverica.controllers.cliente
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -19,6 +21,10 @@ class ClienteActivity : BaseActivity() {
             loadFragment(ClienteInicioFragment())
         }
         binding.navigationWeb.setOnClickListener {
+            val url = "https://www.youtube.com/watch?v=h_GEuFmxsS8"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         binding.navigationHistorial.setOnClickListener {
             loadFragment(ClienteComprasFragment())

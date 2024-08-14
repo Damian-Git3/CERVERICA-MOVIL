@@ -52,7 +52,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.8.8")
-    implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     testImplementation(libs.junit)
@@ -60,4 +59,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     wearApp(project(":wear"))
+    implementation(kotlin("script-runtime"))
 }

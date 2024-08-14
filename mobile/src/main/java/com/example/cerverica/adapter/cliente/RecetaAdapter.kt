@@ -21,8 +21,10 @@ class RecetaAdapter(private val recetas: List<RecetaModel>, private val onClickL
     }
 
     override fun onBindViewHolder(holder: RecetaViewHolder, position: Int) {
-        holder.render(recetas[position], onClickListener)
+        holder.render(recetas[position])
         holder.binding.root.setOnClickListener{
+            onClickListener(recetas[position])
+
             lastSelectedPosition = selectedPosition
             selectedPosition = position
             notifyItemChanged(lastSelectedPosition)
@@ -44,12 +46,9 @@ class RecetaAdapter(private val recetas: List<RecetaModel>, private val onClickL
     class RecetaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding =  ViewholderRecetaBinding.bind(itemView)
 
-        fun render(receta: RecetaModel, onClickListener:(RecetaModel) -> Unit){
+        fun render(receta: RecetaModel){
             binding.nombreReceta.text = receta.nombre
 
-            binding.nombreReceta.setOnClickListener {
-                onClickListener(receta)
-            }
         }
     }
 }

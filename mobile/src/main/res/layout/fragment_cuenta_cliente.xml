@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#343434"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:orientation="vertical" >
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="0dp"
+                android:textAlignment="center"
+                android:text="Info \nCuenta"
+                android:textColor="#ffffff"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/full_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Nombre"
+                android:textSize="20dp"
+                android:textColor="#E1A500"
+                android:padding="11dp"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@drawable/name"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Email"
+                android:textSize="20dp"
+                android:textColor="#E1A500"
+                android:padding="11dp"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                android:drawableStart="@drawable/email"
+                />
+            <TextView
+                android:id="@+id/mensaje"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Tipo de cuenta"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:padding="11dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                />
+            <TextView
+                android:id="@+id/tipo_cuenta"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Tipo de cuenta"
+                android:textSize="20dp"
+                android:textColor="#E1A500"
+                android:padding="11dp"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                android:drawableStart="@drawable/password"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logoutButton"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/login_selector"
+                android:text="Cerrar sesión"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="32dp"/>
+
+            <TextView
+                android:id="@+id/webButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="También puedes acceder desde\nLa Aplicación WEB\nSelecciona este texto o el botón de carrito"
+                android:textAlignment="center"
+                android:textColor="#E1A500"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

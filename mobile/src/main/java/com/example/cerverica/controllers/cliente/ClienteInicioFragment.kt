@@ -17,6 +17,7 @@ import com.example.cerverica.apiservice.RetrofitClient
 import com.example.cerverica.databinding.FragmentInicioClienteBinding
 import com.example.cerverica.models.cliente.RecetaFavoritoModel
 import com.example.cerverica.models.cliente.RecetaModel
+import com.example.cerverica.models.cliente.RecetaPackModel
 import com.example.cerverica.viewmodels.cliente.FavoritoViewModel
 import com.example.cerverica.viewmodels.cliente.PackViewModel
 import com.example.cerverica.viewmodels.cliente.RecetaViewModel
@@ -98,7 +99,9 @@ class ClienteInicioFragment : Fragment() {
                     requireContext(),
                     LinearLayoutManager.HORIZONTAL, false
                 )
-                binding.recyclerViewPacks.adapter = RecetaPackAdapter(packs)
+                binding.recyclerViewPacks.adapter = RecetaPackAdapter(packs){
+                    onAgregarFavorito(it)
+                }
             }
         }
 
@@ -146,11 +149,12 @@ class ClienteInicioFragment : Fragment() {
     }
 
     fun onQuitarFavorito(favorito: RecetaFavoritoModel){
-
+        favoritoViewModel.eliminarFavorito(favorito.idReceta, binding.root.context)
     }
 
-    fun onAgregarFavorito(favorito: RecetaFavoritoModel) {
+    fun onAgregarFavorito(pack: RecetaPackModel) {
 
+        favoritoViewModel.agregarFavorito(pack.idReceta, binding.root.context)
     }
 
     fun realizarBusqueda(text: String){

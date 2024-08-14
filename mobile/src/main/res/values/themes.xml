@@ -3,9 +3,7 @@
     <style name="Base.Theme.CERVERICA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">
-            @android:color/transparent
-        </item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="Theme.CERVERICA" parent="Base.Theme.CERVERICA" />

@@ -37,7 +37,6 @@ data class RecetaFavoritoModel (
 )
 
 data class RecetaEliminarFavoritoRequest(
-    @SerializedName("id") val id: Int,
     @SerializedName("idUsuario") val idUsuario: String,
     @SerializedName("idReceta") val idReceta: Int
 )

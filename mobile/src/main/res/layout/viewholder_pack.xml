@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="195dp"
+    android:layout_height="wrap_content"
     android:clipToPadding="false"
     android:clipChildren="false"
     android:layout_margin="8dp">
@@ -24,6 +24,8 @@
         android:layout_width="55dp"
         android:layout_height="75dp"
         android:elevation="5dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +135,19 @@
                 android:textSize="16sp"
                 />
         </LinearLayout>
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/agregarFavorito"
+            android:layout_width="match_parent"
+            style="@android:style/Widget.Button"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_height="35dp"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            android:textSize="9dp"
+            android:background="@drawable/login_selector"
+            android:text="Guardar" />
     </LinearLayout>
 
     <View

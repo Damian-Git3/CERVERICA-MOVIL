@@ -3,8 +3,6 @@
     <style name="Base.Theme.CERVERICA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor">
-            @android:color/transparent
-        </item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>
