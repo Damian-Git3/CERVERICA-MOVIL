@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="También puedes acceder desde\nLa Aplicación WEB\nSelecciona este texto o el botón de carrito"
+                android:text="También puedes acceder desde\nLa Aplicación WEB\nSelecciona este texto."
                 android:textAlignment="center"
                 android:textColor="#E1A500"
                 android:textSize="16dp"
