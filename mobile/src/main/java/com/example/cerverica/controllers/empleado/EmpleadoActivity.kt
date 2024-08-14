@@ -25,7 +25,7 @@ class EmpleadoActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.navigationPedidos.setOnClickListener {
-            //loadFragment(())
+            loadFragment((EmpleadoListaPedidosFragment()))
         }
 
         binding.navigationNotificaciones.setOnClickListener {
