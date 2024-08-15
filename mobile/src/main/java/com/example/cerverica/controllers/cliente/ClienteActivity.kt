@@ -30,7 +30,7 @@ class ClienteActivity : BaseActivity() {
             loadFragment(ClienteInicioFragment())
         }
         binding.navigationWeb.setOnClickListener {
-            val url = "https://www.youtube.com/watch?v=h_GEuFmxsS8"
+            val url = "http://192.168.137.1:4200/cerverica/inicio "
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)

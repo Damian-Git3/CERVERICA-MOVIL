@@ -87,5 +87,4 @@ class EmpleadoCuentaFragment : Fragment() {
             }
         })
     }
-
 }

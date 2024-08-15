@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -27,6 +28,7 @@ import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataItem
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class LoginActivity : AppCompatActivity() {
 
@@ -43,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.login_button)
         val registerButton = findViewById<TextView>(R.id.register_button)
+        val progressBarLogin = findViewById<LinearProgressIndicator>(R.id.progressBarLogin)
 
         val backButton = findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
@@ -50,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
+            progressBarLogin.visibility = View.VISIBLE
+
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
@@ -62,6 +67,8 @@ class LoginActivity : AppCompatActivity() {
 
             RetrofitClient.instance.postLogin(loginRequest).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    progressBarLogin.visibility = View.GONE
+
                     Log.d("API_RESPONSE", "Response: ${response}")
                     if (response.isSuccessful) {
                         val loginResponse = response.body()
@@ -92,11 +99,13 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, loginResponse?.message, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@LoginActivity, "No successful: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Logueo no exitoso! : ${response.message()}", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    progressBarLogin.visibility = View.GONE
+
                     Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })

@@ -3,6 +3,7 @@ package com.example.cerverica.apiservice
 
 import com.example.cerverica.models.LoginRequest
 import com.example.cerverica.models.LoginResponse
+import com.example.cerverica.models.Pedido
 import com.example.cerverica.models.cliente.RecetaModel
 import com.example.cerverica.models.RegisterRequest
 import com.example.cerverica.models.RegisterResponse
@@ -50,4 +51,13 @@ interface AuthApiService {
 
     @GET("Ventas/cliente")
     fun getClientBuys(): Call<List<VentaModel>>
+
+    @GET("Ventas/pedidos")
+    fun getPedidos():Call<List<Pedido>>
+
+    @GET("Ventas/pedidos/{id}")
+    fun getPedido(@Path("id") idPedido: Int): Call<Pedido>
+
+    @GET("Ventas/siguiente-estatus/{id}")
+    fun marcarSiguienteEstatus(@Path("id") idPedido: Int): Call<Void>
 }
