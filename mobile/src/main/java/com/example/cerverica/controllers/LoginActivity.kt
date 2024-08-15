@@ -28,7 +28,7 @@ import com.google.android.gms.wearable.DataItem
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 
-class LoginActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var dataClient: DataClient
 
@@ -72,8 +72,14 @@ class LoginActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
                             // Guardar cualquier otra información del usuario según sea necesario
                             saveUserInfo(loginResponse.idUsuario, loginResponse.nombre, loginResponse.role)
 
+                            Log.d("WEAR_PROCES", "paso 1 aceptar login")
                             // Enviar datos de login al Wear OS
-                            sendLoginDataToWearOS(loginResponse.idUsuario, loginResponse.nombre, loginResponse.role)
+                            // Enviar datos de login al Wear OS
+                            val loginIntent = Intent("com.example.cerverica.LOGIN_ACTION")
+                            loginIntent.putExtra("idUsuario", loginResponse.idUsuario)
+                            loginIntent.putExtra("nombre", loginResponse.nombre)
+                            loginIntent.putExtra("role", loginResponse.role)
+                            sendBroadcast(loginIntent)
 
                             // Redirigir según el rol del usuario
                             when (loginResponse.role) {  // Suponiendo que "roles" es una lista y tomas el primer rol
@@ -117,38 +123,5 @@ class LoginActivity : AppCompatActivity(), DataClient.OnDataChangedListener {
         editor.putString("nombre", nombre)
         editor.putString("role", role)
         editor.apply()
-    }
-
-    private fun sendLoginDataToWearOS(idUsuario: String, nombre: String, role: String) {
-        val putDataMapRequest = PutDataMapRequest.create("/login_data")
-        val dataMap = putDataMapRequest.dataMap
-        dataMap.putString("idUsuario", idUsuario)
-        dataMap.putString("nombre", nombre)
-        dataMap.putString("role", role)
-        dataMap.putString("action", "change_activity")  // Añadido para cambiar la actividad
-        val request = putDataMapRequest.asPutDataRequest()
-        val dataItemTask: Task<DataItem> = dataClient.putDataItem(request)
-
-        dataItemTask.addOnSuccessListener {
-            Log.d("WEAR_PROCES", "Login data sent successfully to Wear OS.")
-        }
-
-        dataItemTask.addOnFailureListener {
-            Log.e("WEAR_PROCES", "Failed to send login data to Wear OS.")
-        }
-    }
-
-    override fun onDataChanged(dataEvents: DataEventBuffer) {
-        // Manejar los datos recibidos si es necesario
-    }
-
-    override fun onResume() {
-        super.onResume()
-        dataClient.addListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        dataClient.removeListener(this)
     }
 }
