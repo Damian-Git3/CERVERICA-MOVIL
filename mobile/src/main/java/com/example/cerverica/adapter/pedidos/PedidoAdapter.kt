@@ -8,10 +8,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cerverica.R
+import com.example.cerverica.databinding.ViewholderPedidoBinding
+import com.example.cerverica.databinding.ViewholderRecetaBinding
 import com.example.cerverica.models.Pedido
+import com.example.cerverica.models.cliente.RecetaFavoritoModel
 
 class PedidoAdapter(
-    private var pedidos: List<Pedido>
+    private var pedidos: List<Pedido>,
+    private val onClickListener:(Pedido) -> Unit
 ) : RecyclerView.Adapter<PedidoAdapter.ViewHolder>() {
 
     private var listener: View.OnClickListener? = null
@@ -63,6 +67,10 @@ class PedidoAdapter(
         holder.tvCantidadTotalBotellas.text = pedido.totalCervezas.toString()
         holder.tvFechaVenta.text = pedido.fechaVenta
         holder.tvMetodoEnvio.text = metodoEnvio
+
+        holder.binding.root.setOnClickListener{
+            onClickListener(pedidos[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -70,6 +78,8 @@ class PedidoAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val binding =  ViewholderPedidoBinding.bind(itemView)
+
         val tvEstatus: TextView = itemView.findViewById(R.id.tvEstatus)
         val tvCantidadTotalBotellas: TextView = itemView.findViewById(R.id.tvCantidadTotalBotellas)
         val tvFechaVenta: TextView = itemView.findViewById(R.id.tvFechaVenta)

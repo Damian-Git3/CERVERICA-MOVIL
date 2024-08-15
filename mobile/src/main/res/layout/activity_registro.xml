@@ -127,6 +127,14 @@
                 android:textStyle="bold"
                 android:layout_margin="32dp"/>
 
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBarRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="#E1A500"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

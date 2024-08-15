@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cerverica.R
@@ -37,19 +38,20 @@ class EmpleadoListaPedidosFragment : Fragment() {
         obtenerPedidos()
     }
 
-    private fun inicializarComponentes(){
+    private fun inicializarComponentes() {
+        pedidoViewModel = ViewModelProvider(this).get(PedidoViewModel::class.java)
     }
 
-    fun obtenerPedidos(){
-        pedidoViewModel = ViewModelProvider(this).get(PedidoViewModel::class.java)
-
+    fun obtenerPedidos() {
         pedidoViewModel.pedidos.observe(viewLifecycleOwner) { pedidos ->
             if (pedidos != null) {
                 binding.RVPedidos.layoutManager = LinearLayoutManager(
                     requireContext(),
                     LinearLayoutManager.VERTICAL, false
                 )
-                binding.RVPedidos.adapter = PedidoAdapter(pedidos)
+                binding.RVPedidos.adapter = PedidoAdapter(pedidos) { pedido ->
+                    cargarProcesarPedido(pedido.id)
+                }
             }
         }
 
@@ -65,4 +67,15 @@ class EmpleadoListaPedidosFragment : Fragment() {
 
         pedidoViewModel.obtenerPedidos()
     }
+
+    private fun cargarProcesarPedido(idPedido: Int) {
+        val fragment = EmpleadoProcesarPedidoFragment.newInstance(idPedido)
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+
 }

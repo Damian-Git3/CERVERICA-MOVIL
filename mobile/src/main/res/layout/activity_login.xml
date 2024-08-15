@@ -93,7 +93,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progressBar"
+                android:id="@+id/progressBarLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"

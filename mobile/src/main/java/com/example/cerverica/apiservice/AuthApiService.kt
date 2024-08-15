@@ -54,4 +54,10 @@ interface AuthApiService {
 
     @GET("Ventas/pedidos")
     fun getPedidos():Call<List<Pedido>>
+
+    @GET("Ventas/pedidos/{id}")
+    fun getPedido(@Path("id") idPedido: Int): Call<Pedido>
+
+    @GET("Ventas/siguiente-estatus/{id}")
+    fun marcarSiguienteEstatus(@Path("id") idPedido: Int): Call<Void>
 }

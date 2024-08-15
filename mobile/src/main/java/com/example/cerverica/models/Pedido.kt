@@ -7,5 +7,6 @@ data class Pedido(
     @SerializedName("fechaVenta") val fechaVenta: String,
     @SerializedName("totalCervezas") val totalCervezas: Float,
     @SerializedName("metodoEnvio") val metodoEnvio: Int,
-    @SerializedName("estatusVenta") val estatusVenta: Int
+    @SerializedName("estatusVenta") val estatusVenta: Int,
+    @SerializedName("productosPedido") val productosPedido: List<DetalleVenta>
 )
