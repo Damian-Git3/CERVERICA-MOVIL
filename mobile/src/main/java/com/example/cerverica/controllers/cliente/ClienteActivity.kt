@@ -41,8 +41,9 @@ class ClienteActivity : BaseActivity() {
         binding.navigationCuenta.setOnClickListener {
             loadFragment(ClienteCuentaFragment())
         }
-        binding.navigationFavoritos.setOnClickListener {
-            loadFragment(ClienteFavoritosFragment())
+        binding.navigationNotificaciones.setOnClickListener {
+            loadFragment(ClienteNotificacionesFragment())
+
         }
         if (savedInstanceState == null) {
             loadFragment(ClienteInicioFragment())

@@ -11,7 +11,6 @@ import com.example.cerverica.BaseActivity
 import com.example.cerverica.R
 import com.example.cerverica.controllers.cliente.ClienteComprasFragment
 import com.example.cerverica.controllers.cliente.ClienteCuentaFragment
-import com.example.cerverica.controllers.cliente.ClienteFavoritosFragment
 import com.example.cerverica.controllers.cliente.ClienteInicioFragment
 import com.example.cerverica.databinding.ActivityClienteBinding
 import com.example.cerverica.databinding.ActivityEmpleadoBinding
@@ -27,9 +26,12 @@ class EmpleadoActivity : BaseActivity() {
         binding.navigationPedidos.setOnClickListener {
             loadFragment((EmpleadoListaPedidosFragment()))
         }
+        binding.navigationInicio.setOnClickListener {
+            loadFragment(EmpleadoInicioFragment())
+        }
 
         binding.navigationNotificaciones.setOnClickListener {
-            //loadFragment(())
+            loadFragment(EmpleadoNotificacionesFragment())
         }
         binding.navigationCuenta.setOnClickListener {
             loadFragment((EmpleadoCuentaFragment()))

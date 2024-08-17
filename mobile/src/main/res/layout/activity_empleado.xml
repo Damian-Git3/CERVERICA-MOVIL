@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:id="@+id/navigation_notificaciones">
+                    android:id="@+id/navigation_inicio">
 
                     <ImageView
                         android:id="@+id/imageView5"
@@ -107,7 +107,23 @@
                         app:srcCompat="@drawable/request"
                         app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:id="@+id/navigation_notificaciones">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/bell2"
+                        app:tint="@color/black" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>

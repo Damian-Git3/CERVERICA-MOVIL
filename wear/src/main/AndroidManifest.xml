@@ -19,6 +19,9 @@
                 <action android:name="com.example.cerverica.LOGOUT" />
                 <action android:name="com.example.cerverica.SINC" />
                 <action android:name="com.example.cerverica.CHECK" />
+                <action android:name="com.example.cerverica.INFO" />
+                <action android:name="com.example.cerverica.NOTIFICATIONS" />
+                <action android:name="com.example.cerverica.FIRE_NOTIFICATION" />
             </intent-filter>
         </receiver>
         <service
@@ -55,7 +58,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".InicioActivity" />
-        <activity android:name=".EmpleadoActivity" />
+        <activity android:name=".CuentaActivity" />
+        <activity android:name=".NotificationActivity" />
     </application>
 
 </manifest>

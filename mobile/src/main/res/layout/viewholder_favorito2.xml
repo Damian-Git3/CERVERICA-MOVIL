@@ -29,7 +29,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagen"
         android:layout_width="55dp"
-        android:layout_height="75dp"
+        android:layout_height="match_parent"
         android:elevation="5dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/imagenFondo"

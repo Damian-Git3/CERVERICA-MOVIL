@@ -12,7 +12,7 @@ import com.example.cerverica.databinding.ViewholderFavoritoBinding
 import com.example.cerverica.models.cliente.RecetaFavoritoModel
 import com.example.cerverica.models.cliente.RecetaPackModel
 
-class FavoritoAdapter(private val recetas: List<RecetaFavoritoModel>, private val onClickListener:(RecetaFavoritoModel) -> Unit) : RecyclerView.Adapter<FavoritoAdapter.RecetaFavoritoViewHolder>() {
+class FavoritoAdapter(private var recetas: List<RecetaFavoritoModel>, private val onClickListener:(RecetaFavoritoModel) -> Unit) : RecyclerView.Adapter<FavoritoAdapter.RecetaFavoritoViewHolder>() {
 
     private var filteredList: MutableList<RecetaFavoritoModel> = recetas.toMutableList()
 
@@ -24,6 +24,11 @@ class FavoritoAdapter(private val recetas: List<RecetaFavoritoModel>, private va
     override fun onBindViewHolder(holder: RecetaFavoritoViewHolder, position: Int) {
         holder.render(filteredList[position], onClickListener)
 
+    }
+
+    fun updateFavoritos(nuevosFavoritos: List<RecetaFavoritoModel>) {
+        this.recetas = nuevosFavoritos
+        filter("")  // Reaplicar el filtro para actualizar la vista
     }
 
     override fun getItemCount() :Int {

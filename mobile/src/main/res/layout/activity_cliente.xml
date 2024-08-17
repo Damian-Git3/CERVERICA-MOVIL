@@ -13,7 +13,10 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -98,13 +101,13 @@
 
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bottom_btn3"
+                        app:srcCompat="@drawable/card"
                         app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,17 +115,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:id="@+id/navigation_favoritos">
+                    android:id="@+id/navigation_notificaciones">
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/heart"
+                        app:srcCompat="@drawable/bell2"
                         app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

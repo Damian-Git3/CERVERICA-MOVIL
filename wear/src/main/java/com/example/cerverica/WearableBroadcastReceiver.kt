@@ -24,6 +24,21 @@ class WearableBroadcastReceiver : BroadcastReceiver() {
             val serviceIntent = Intent(context, WearableService::class.java)
             serviceIntent.putExtra("action", "check")
             context?.startService(serviceIntent)
+        }else if (action == "com.example.cerverica.INFO") {
+            val serviceIntent = Intent(context, WearableService::class.java)
+            serviceIntent.putExtra("action", "info")
+            context?.startService(serviceIntent)
+        }
+        else if (action == "com.example.cerverica.NOTIFICATIONS") {
+            val serviceIntent = Intent(context, WearableService::class.java)
+            serviceIntent.putExtra("action", "notificaciones")
+            context?.startService(serviceIntent)
+        }else if (action == "com.example.cerverica.FIRE_NOTIFICATION") {
+            val id = intent.getIntExtra("id",0)
+            val serviceIntent = Intent(context, WearableService::class.java)
+            serviceIntent.putExtra("action", "borrar")
+            serviceIntent.putExtra("id", id)
+            context?.startService(serviceIntent)
         }
     }
 }

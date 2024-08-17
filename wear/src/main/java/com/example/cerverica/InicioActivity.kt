@@ -28,5 +28,18 @@ class InicioActivity : ComponentActivity() {
             val logoutIntent = Intent("com.example.cerverica.LOGOUT")
             sendBroadcast(logoutIntent)
         }
+
+        val cuentaButton = findViewById<TextView>(R.id.cuenta)
+        cuentaButton.setOnClickListener {
+            val verCuenta = Intent("com.example.cerverica.INFO")
+            sendBroadcast(verCuenta)
+        }
+
+        val notificiaciones = findViewById<Button>(R.id.notificaciones)
+
+        notificiaciones.setOnClickListener {
+            val ask = Intent("com.example.cerverica.NOTIFICATIONS")
+            sendBroadcast(ask)
+        }
     }
 }

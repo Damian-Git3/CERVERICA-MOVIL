@@ -9,12 +9,12 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:scrollbars="none"
-    android:paddingBottom="120dp">
+    android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="52dp"
         android:orientation="vertical">
 
 
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Fecha Ascendente"
+                android:text="Fecha Descendente"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />

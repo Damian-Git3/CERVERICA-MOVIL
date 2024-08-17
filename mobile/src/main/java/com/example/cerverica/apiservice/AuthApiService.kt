@@ -3,6 +3,7 @@ package com.example.cerverica.apiservice
 
 import com.example.cerverica.models.LoginRequest
 import com.example.cerverica.models.LoginResponse
+import com.example.cerverica.models.NotificacionModel
 import com.example.cerverica.models.Pedido
 import com.example.cerverica.models.cliente.RecetaModel
 import com.example.cerverica.models.RegisterRequest
@@ -19,6 +20,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface AuthApiService {
@@ -60,4 +62,10 @@ interface AuthApiService {
 
     @GET("Ventas/siguiente-estatus/{id}")
     fun marcarSiguienteEstatus(@Path("id") idPedido: Int): Call<Void>
+
+    @GET("Notificacion")
+    fun getNotificaciones() : Call<List<NotificacionModel>>
+
+    @PUT("Notificacion/{id}")
+    fun putNotificacionVista(@Path("id") id: Int) : Call<ResponseBody>
 }

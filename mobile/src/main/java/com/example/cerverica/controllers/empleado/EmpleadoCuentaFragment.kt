@@ -42,27 +42,8 @@ class EmpleadoCuentaFragment : Fragment() {
     }
 
     fun logout(){
-        RetrofitClient.instance.postLogout().enqueue(object :
-            Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
-                if (!response.isSuccessful) {
-                    val error = "Advertencia: ${response.errorBody()?.string()}"
-                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                }else{
-                    Log.d("logout", "onResponse: ${response.body()}")
-                    Toast.makeText(context, "Adiós", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                val error = "Fallo en la consulta: ${t.message}"
-                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-            }
-        })
+        val logoutIntent = Intent("com.example.cerverica.LOGOUT_ACTION")
+        context?.sendBroadcast(logoutIntent)
     }
 
     fun initDetalles(){

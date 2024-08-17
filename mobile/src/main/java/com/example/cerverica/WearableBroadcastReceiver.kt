@@ -12,11 +12,13 @@ class WearableBroadcastReceiver : BroadcastReceiver() {
         if (action == "com.example.cerverica.LOGIN_ACTION") {
             Log.d("WEAR_PROCES", "paso 3: enviar la solicitud de login al servicio ")
             val idUsuario = intent.getStringExtra("idUsuario")
+            val email = intent.getStringExtra("email")
             val nombre = intent.getStringExtra("nombre")
             val role = intent.getStringExtra("role")
             val serviceIntent = Intent(context, MobileWearableService::class.java)
             serviceIntent.putExtra("action", "login")
             serviceIntent.putExtra("idUsuario", idUsuario)
+            serviceIntent.putExtra("email",email)
             serviceIntent.putExtra("nombre", nombre)
             serviceIntent.putExtra("role", role)
             context?.startService(serviceIntent)

@@ -18,16 +18,23 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FavoritoViewModel : ViewModel() {
-        private val _favoritos = MutableLiveData<List<RecetaFavoritoModel>>()
-        val favoritos: LiveData<List<RecetaFavoritoModel>> get() = _favoritos
 
-        private val _loading = MutableLiveData<Boolean>()
-        val loading: LiveData<Boolean> get() = _loading
+    private val _favoritos = MutableLiveData<List<RecetaFavoritoModel>>()
+    val favoritos: LiveData<List<RecetaFavoritoModel>> get() = _favoritos
 
-        private val _error = MutableLiveData<String>()
-        val error: LiveData<String> get() = _error
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
 
-        private fun getIdUsuario(): String? {
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
+    private val _eliminacionExitoso = MutableLiveData<Boolean>()
+    val eliminacionExitoso: LiveData<Boolean> get() = _eliminacionExitoso
+
+    private val _agregadoExitoso = MutableLiveData<Boolean>()
+    val agregadoExitoso: LiveData<Boolean> get() = _agregadoExitoso
+
+    private fun getIdUsuario(): String? {
             val sharedPref = MyApplication.context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
             return sharedPref.getString("idUsuario", null)
         }
@@ -71,13 +78,16 @@ class FavoritoViewModel : ViewModel() {
                     Log.d("Favorito", "onResponse: ${response}")
                     if (!response.isSuccessful) {
                         _error.value = "Advertencia: ${response.errorBody()?.string()}"
+                        _agregadoExitoso.value = false
                     }else{
-                        Toast.makeText(context,"Se agregó el favorito.\nRecarge la página para ver cambios.",Toast.LENGTH_SHORT).show()
+                        fetchFavoritos()
+                        _agregadoExitoso.value = true
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     _error.value = "Fallo en la consulta: ${t.message}"
+                    _agregadoExitoso.value = false
                 }
             })
         }
@@ -93,13 +103,16 @@ class FavoritoViewModel : ViewModel() {
 
                     if (!response.isSuccessful) {
                         _error.value = "Advertencia: ${response.errorBody()?.string()}"
+                        _eliminacionExitoso.value = false
                     }else{
-                        Toast.makeText(context,"Se quitó el favorito.\nRecarge la página para ver cambios.",Toast.LENGTH_SHORT).show()
+                        fetchFavoritos()
+                        _eliminacionExitoso.value = true
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     _error.value = "Fallo en la consulta: ${t.message}"
+                    _eliminacionExitoso.value = false
                 }
             })
         }

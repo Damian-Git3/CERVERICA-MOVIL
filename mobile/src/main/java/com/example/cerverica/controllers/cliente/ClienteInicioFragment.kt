@@ -1,5 +1,6 @@
 package com.example.cerverica.controllers.cliente
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cerverica.adapter.cliente.Favorito2Adapter
 import com.example.cerverica.adapter.cliente.FavoritoAdapter
 import com.example.cerverica.adapter.cliente.RecetaAdapter
 import com.example.cerverica.adapter.cliente.RecetaPackAdapter
@@ -30,6 +32,7 @@ class ClienteInicioFragment : Fragment() {
     private lateinit var packViewModel: PackViewModel
     private lateinit var favoritoViewModel: FavoritoViewModel
     private lateinit var binding: FragmentInicioClienteBinding
+    private lateinit var favoritoAdapter: FavoritoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +53,24 @@ class ClienteInicioFragment : Fragment() {
             (binding.recyclerViewPacks.adapter as RecetaPackAdapter).filter("")
         }
         binding.verTodoFavoritos.setOnClickListener{
-            (binding.recyclerViewFavoritos.adapter as FavoritoAdapter).filter("")
+            //(binding.recyclerViewFavoritos.adapter as FavoritoAdapter).filter("")
+            val intent = Intent(requireContext(),ClienteFavoritosActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+
         }
 
         initRecetas()
         initPacks()
         initFavoritos()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (::binding.isInitialized && binding.recyclerViewFavoritos.adapter != null) {
+            (binding.recyclerViewFavoritos.adapter as FavoritoAdapter).filter("")
+        }
     }
 
     fun initRecetas(){
@@ -122,15 +137,34 @@ class ClienteInicioFragment : Fragment() {
     fun initFavoritos(){
         favoritoViewModel = ViewModelProvider(this).get(FavoritoViewModel::class.java)
 
+        // Inicializar el adapter y el RecyclerView
+        favoritoAdapter = FavoritoAdapter(emptyList()) { favorito -> onQuitarFavorito(favorito) }
+        binding.recyclerViewFavoritos.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL, false
+        )
+        binding.recyclerViewFavoritos.adapter = favoritoAdapter
+
         // Suscribirse a los LiveData del ViewModel
         favoritoViewModel.favoritos.observe(viewLifecycleOwner) { favoritos ->
-            if (favoritos != null) {
-                binding.recyclerViewFavoritos.layoutManager = LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.HORIZONTAL, false
-                )
-                binding.recyclerViewFavoritos.adapter = FavoritoAdapter(favoritos
-                ) { favorito -> onQuitarFavorito(favorito) }
+            favoritos?.let {
+                favoritoAdapter.updateFavoritos(it)
+            }
+        }
+
+        favoritoViewModel.eliminacionExitoso.observe(viewLifecycleOwner) { exito ->
+            if (exito) {
+                Toast.makeText(requireContext(),"Se quitó el favorito",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "No se pudo eliminar el favorito", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        favoritoViewModel.agregadoExitoso.observe(viewLifecycleOwner) { exito ->
+            if (exito) {
+                Toast.makeText(requireContext(),"Se agregó el favorito",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "No se pudo agregar el favorito", Toast.LENGTH_SHORT).show()
             }
         }
 

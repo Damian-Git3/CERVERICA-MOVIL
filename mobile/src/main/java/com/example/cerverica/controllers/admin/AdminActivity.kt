@@ -32,6 +32,9 @@ class AdminActivity : BaseActivity() {
         binding.navigationProducciones.setOnClickListener {
             //loadFragment(())
         }
+        binding.navigationNotificaciones.setOnClickListener {
+            loadFragment(AdminNotificacionesFragment())
+        }
         if (savedInstanceState == null) {
             loadFragment(AdminInicioFragment())
         }

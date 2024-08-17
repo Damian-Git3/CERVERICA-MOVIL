@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     implementation("androidx.core:core-ktx:1.13.1")
+    implementation("com.google.code.gson:gson:2.8.8")
 
     implementation(libs.androidx.tiles)
     implementation(libs.androidx.tiles.material)
@@ -66,6 +67,7 @@ dependencies {
     implementation(libs.horologist.tiles)
     implementation(libs.androidx.watchface.complications.data.source.ktx)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

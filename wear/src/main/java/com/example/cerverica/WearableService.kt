@@ -45,6 +45,16 @@ class WearableService : Service(), DataClient.OnDataChangedListener {
                 Log.d("WEAR_PROCES", "comprobar login service")
                 checkCurrentSessionStatus()
             }
+            "info" -> {
+                sendInfoRequestToMobile()
+            }
+            "notificaciones" -> {
+                sendNotificationsRequestToMobile()
+            }
+            "borrar" -> {
+                val id = intent.getIntExtra("id",0)
+                sendRemoveNotificationRequestToMobile(id)
+            }
         }
 
         Log.d("WEAR_PROCES", "comprobar el login")
@@ -55,17 +65,17 @@ class WearableService : Service(), DataClient.OnDataChangedListener {
     }
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
-        Log.d("WEAR_PROCES", "paso 1: se detecto un cambio")
+        Log.d("WEAR_PROCES", "onDataChanged")
         for (event in dataEvents) {
             if (event.type == DataEvent.TYPE_CHANGED) {
                 val dataItem = event.dataItem
                 if (dataItem.uri.path == "/session_data") {
-                    Log.d("WEAR_PROCES", "paso 2: es un cambio en el estatus de la sesion")
+                    Log.d("WEAR_PROCES", "read session data")
                     val dataMap = dataItem.data?.let { DataMap.fromByteArray(it) }
                     val action = dataMap?.getString("action")
 
                     if (action == "login") {
-                        Log.d("WEAR_PROCES", "paso 3: es un login")
+                        Log.d("WEAR_PROCES", "new login")
                         // Cambiar a la actividad de inicio
                         val idUsuario = dataMap.getString("idUsuario")
                         val nombre = dataMap.getString("nombre")
@@ -78,19 +88,114 @@ class WearableService : Service(), DataClient.OnDataChangedListener {
                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         }
                         startActivity(intent)
-                    }else if(action == "logout"){
+                    } else if (action == "logout") {
                         Log.d("WEAR_PROCES", "paso 3: es un logout")
                         handleLogout()
+                    } else if (action == "info") {
+                        Log.e("WEAR_PROCES", "new info arrived")
+                    }
+                } else if(dataItem.uri.path == "/data_response"){
+                    val dataMap = dataItem.data?.let { DataMap.fromByteArray(it) }
+                    val action = dataMap?.getString("action")
+
+                    if (action == "info") {
+                        val nombre = dataMap.getString("nombre")
+                        val email = dataMap.getString("email")
+                        val role = dataMap.getString("role")
+                        handleCuenta(nombre!!, email!!, role!!)
+                    }else if (action == "notifications") {
+                        val jsonString = dataMap?.getString("notificaciones")
+                        Log.d("WEAR_PROCES", "data: ${jsonString}")
+                        if (!jsonString.isNullOrEmpty()) {
+                            val intent = Intent(this, NotificationActivity::class.java).apply {
+                                putExtra("notificaciones", jsonString)
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            startActivity(intent)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun handleLogout() {
+    fun sendNotificationsRequestToMobile(){
+        Log.d("WEAR_PROCES", "Sending notifications request to mobile")
+        val putDataMapRequest = PutDataMapRequest.create("/data_request")
+        val dataMap = putDataMapRequest.dataMap
+
+        dataMap.putString("action", "notifications")
+        //se pone un numero para que el DataItem tenga un cambio siempre y de este modo se active onDataChange
+        dataMap.putInt("controlNumber", Random.nextInt())
+
+        val request = putDataMapRequest.asPutDataRequest()
+        val dataItemTask: Task<DataItem> = dataClient.putDataItem(request)
+
+        dataItemTask.addOnSuccessListener {
+            Log.d("WEAR_PROCES", "Notifications request sent successfully to mobile.")
+        }
+
+        dataItemTask.addOnFailureListener {
+            Log.e("WEAR_PROCES", "Failed to send Notifications request to mobile.")
+        }
+    }
+
+    fun sendRemoveNotificationRequestToMobile(id : Int){
+        Log.d("WEAR_PROCES", "Sending notification remove request to mobile")
+        val putDataMapRequest = PutDataMapRequest.create("/data_request")
+        val dataMap = putDataMapRequest.dataMap
+        dataMap.putInt("id", id)
+
+        dataMap.putString("action", "notification_remove")
+        //se pone un numero para que el DataItem tenga un cambio siempre y de este modo se active onDataChange
+        dataMap.putInt("controlNumber", Random.nextInt())
+        val request = putDataMapRequest.asPutDataRequest()
+        val dataItemTask: Task<DataItem> = dataClient.putDataItem(request)
+
+        dataItemTask.addOnSuccessListener {
+            Log.d("WEAR_PROCES", "Notification remove request sent successfully to mobile.")
+        }
+
+        dataItemTask.addOnFailureListener {
+            Log.e("WEAR_PROCES", "Failed to send notification remove request to mobile.")
+        }
+    }
+
+    fun handleCuenta(nombre: String, email:String, role:String) {
+        val intent = Intent(this, CuentaActivity::class.java).apply {
+            putExtra("nombre", nombre)
+            putExtra("email", email)
+            putExtra("role", role)
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+
+    fun handleLogout() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+    }
+
+    fun sendInfoRequestToMobile() {
+        Log.d("WEAR_PROCES", "Sending info request to mobile")
+        val putDataMapRequest = PutDataMapRequest.create("/data_request")
+        val dataMap = putDataMapRequest.dataMap
+
+        dataMap.putString("action", "info")
+        //se pone un numero para que el DataItem tenga un cambio siempre y de este modo se active onDataChange
+        dataMap.putInt("controlNumber", Random.nextInt())
+        val request = putDataMapRequest.asPutDataRequest()
+        val dataItemTask: Task<DataItem> = dataClient.putDataItem(request)
+
+        dataItemTask.addOnSuccessListener {
+            Log.d("WEAR_PROCES", "Info request sent successfully to mobile.")
+        }
+
+        dataItemTask.addOnFailureListener {
+            Log.e("WEAR_PROCES", "Failed to send info request to mobile.")
+        }
     }
 
     fun sendLogoutRequestToMobile() {

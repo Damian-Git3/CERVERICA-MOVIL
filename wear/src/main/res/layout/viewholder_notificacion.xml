@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minWidth="345dp"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="2dp"
+    android:layout_height="60dp"
+    android:layout_marginTop="4dp"
+    android:layout_margin="6dp"
+    android:background="@drawable/white_bg"
+    android:elevation="3dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/icono_tipo"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/beer"
+        app:tint="@color/orange" />
+
+    <TextView
+        android:id="@+id/fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+android:textColor="@color/black"
+        android:layout_marginBottom="2dp"
+        android:text="10 ago a las 9:50 a. m."
+        android:textSize="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icono_tipo" />
+
+    <TextView
+        android:id="@+id/mensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="10dp"
+        android:lines="3"
+        android:maxWidth="110dp"
+        android:maxLines="3"
+        android:text="Recibido"
+        android:textColor="@color/darkGrey"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/icono_tipo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/boton_visto"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fire"
+        app:tint="@color/black"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
